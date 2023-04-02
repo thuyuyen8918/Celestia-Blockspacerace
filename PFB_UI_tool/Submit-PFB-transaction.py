@@ -1,6 +1,8 @@
 import json
 import requests
 import os
+import base64
+import binascii
 
 # System call
 os.system("")
@@ -58,14 +60,24 @@ while True:
     
     elif choice == '2':
         print("\nKindly provide your info:")
-        namespaceshare = input("Enter your namespace: ")
+        namespace_id = input("Enter your namespace: ")
         blockheight = input("Enter submitted blockheight: ")
-        url = f"https://celestia.candy-crush-saga.xyz/namespaced_shares/{namespaceshare}/height/{blockheight}";        
-        response = requests.get(url)
+        shares_url = f"https://celestia.candy-crush-saga.xyz/namespaced_shares/{namespace_id}/height/{blockheight}"; # API for getting namespaceshares
+        data_url = f"https://celestia.candy-crush-saga.xyz/namespaced_data/{namespace_id}/height/{blockheight}"; # API for getting original submitted data
 		
-		# Print out detail data
-        print(style.GREEN + "\nYour namespaceshare has detail data as below" + style.RESET)
-        print(json.dumps(response.json(), indent=4, sort_keys=True, ensure_ascii=False))
+        shares_response = requests.get(shares_url) # # Get shares data
+        data_response = requests.get(data_url) # Get original submitted data
+		
+		# Convert original data from base64 to hexa format
+        json_data_response = json.loads(data_response.text)
+        orig_data = json_data_response['data'][0]
+        decoded_bytes = base64.b64decode(orig_data)
+        hex_orig_data = binascii.hexlify(decoded_bytes).decode("utf-8")
+		
+		# Print out information
+        print(f"\nYour original submitted hex data at blockheight " + style.GREEN + f"{blockheight}" + style.RESET + " is " + style.GREEN + f"{hex_orig_data}" + style.RESET)				
+        print(style.YELLOW + "\nYour namespaceshare has detail data as below" + style.RESET)
+        print(json.dumps(shares_response.json(), indent=4, sort_keys=True, ensure_ascii=False))
 		
     elif choice == '3':
         # Exit program        
