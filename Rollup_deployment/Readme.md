@@ -46,4 +46,39 @@ archwayd status | jq
 ![image](https://github.com/thuyuyen8918/Celestia-Blockspacerace/assets/109055532/a7b07ed9-ad31-496e-98de-29778f86470d)
 
 
-### 4
+### 4. Setup Full Node of `Archway` rollupchain
+#### 4.1 Prepration
+- You can setup another Celestia DA node for your Rollup Fullnode.
+- In last step of sequencer setup show some basic function of your rollup chain, later u will use it to setup your node.
+![image](https://github.com/thuyuyen8918/Celestia-Blockspacerace/assets/109055532/9427015f-81f0-46f2-b221-985a67b90f4c)
+
+#### 4.2 Setup Fullnode
+- Collect Node ID, IP and port of Sequencer node from sequencer server
+```
+# show sequencer id
+archwayd status | jq -r '.NodeInfo.id'
+
+# show sequencer p2p peer info
+echo -e "$(curl -s ifconfig.me):$(archwayd status | jq -r ".NodeInfo.listen_addr" | awk -F\/ '{print $NF}')"
+```
+- Download script and run it to setup automatically the sequencer node on top of Celestia Blockspacerace DA network.
+```
+cd $HOME
+git clone https://github.com/thuyuyen8918/Celestia-Blockspacerace
+cd Celestia-Blockspacerace/Rollup_deployment/
+chmod +x archway_fullnode.sh
+./archway_fullnode.sh
+```
+
+- Script will compile binary file of `Archwayd` automatically, then you need to fill in information of your rollup chain
+![image](https://github.com/thuyuyen8918/Celestia-Blockspacerace/assets/109055532/dd7a3977-b102-450c-995e-bafcaa13f99e)
+
+- After finish fullnode setup, you need to download the file `genesis.json` from server of sequencer node, then upload to the path `/root/.archway/config` of fullnode server.
+
+- Start your fullnode 
+```
+sudo systemctl restart archway-fullnode.service
+sudo journalctl -u archway-fullnode.service -f -o cat
+```
+
+
