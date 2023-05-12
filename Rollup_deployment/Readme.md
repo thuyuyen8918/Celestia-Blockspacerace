@@ -80,5 +80,5 @@ chmod +x archway_fullnode.sh
 sudo systemctl restart archway-fullnode.service
 sudo journalctl -u archway-fullnode.service -f -o cat
 ```
-
+![image](https://github.com/thuyuyen8918/Celestia-Blockspacerace/assets/109055532/2cb36278-1c98-4b3e-8982-3e2035ae0527)
 
