@@ -176,7 +176,7 @@ read DA_BLOCKTIME
 
 if [[ $DA_BLOCKTIME == "" ]]; then
         DA_BLOCKTIME=10;
-        echo -e "\nDefault blocktime of DA network: \033[0;31m${DA_BLOCKTIME}s\033[0ms\n"
+        echo -e "\nDefault blocktime of DA network: \033[0;31m${DA_BLOCKTIME}s\033[0m\n"
 fi
 
 # Check current block height of DA network of Celestia-Blockspacerace
