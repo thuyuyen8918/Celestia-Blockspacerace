@@ -5,7 +5,7 @@
 ## B. Installation of Rollup chain
 ### 1. Prerequisite
 - A Celestia DA Full/Light node should be available. You can refer the [link](https://docs.celestia.org/nodes/celestia-node) for setting up your DA node. 
-- I will used my owned DA Fullnode in this guide.
+- I will use my owned DA Fullnode in this guide.
 
 ### 2. Notes
 - In this guide, i will use Rollkit SDK version `v0.45.10-rollkit-v0.7.3-no-fraud-proofs` and Rollkit Tendermint version `v0.34.22-0.20221202214355-3605c597500d`.
