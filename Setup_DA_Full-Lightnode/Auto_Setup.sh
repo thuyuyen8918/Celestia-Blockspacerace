@@ -1,7 +1,7 @@
 #!/bin/bash
 
-FULL_VER="v0.9.0"
-LIGHT_VER="v0.8.1"
+FULL_VER="v0.9.4"
+LIGHT_VER="v0.9.4"
 
 echo -e "\n\e[42mThe tool is used to setup your DA Full/Light Node in Celestia Blockspacerace Network!\e[0m"
 echo -e "\n- Current Fullnode version: \033[0;31m${FULL_VER}\033[0m"
@@ -48,11 +48,11 @@ git clone https://github.com/celestiaorg/celestia-node.git
 cd celestia-node/
 if [[ $CEL_NODETYPE == "full" ]] 
 then 
-	git checkout tags/v0.9.0
+	git checkout tags/$FULL_VER
 else
 	if [[ $CEL_NODETYPE == "light" ]]
 	then 
-		git checkout tags/v0.8.1
+		git checkout tags/$LIGHT_VER
 	fi 
 fi 
 make build
